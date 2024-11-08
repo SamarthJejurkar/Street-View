@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Panorama Tour</title>
+    <!-- Link to Pannellum CSS file from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #panorama {
+            width: 100%;
+            height: 100vh; /* Full screen height */
+        }
+        /* Styling for forward navigation arrow */
+        .custom-hotspot-next::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            border: solid 5px #ffffff;
+            border-left: none;
+            border-top: none;
+            display: block;
+            transform: rotate(225deg); /* Arrow rotated by 180 degrees, now pointing up */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -15px;
+            margin-left: -15px;
+            animation: pulse 1.5s infinite;
+        }
+        /* Styling for backward navigation arrow */
+        .custom-hotspot-previous::after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            border: solid 5px #ffffff;
+            border-right: none;
+            border-bottom: none;
+            display: block;
+            transform: rotate(45deg); /* Arrow rotated by 180 degrees, now pointing down */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -15px;
+            margin-left: -15px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1) rotate(225deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(225deg);
+            }
+            100% {
+                transform: scale(1) rotate(225deg);
+            }
+        }
+        /* Hover effect */
+        .custom-hotspot-next:hover::after,
+        .custom-hotspot-previous:hover::after {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Container for the panorama viewer -->
+    <div id="panorama"></div>
+
+    <!-- Link to Pannellum JavaScript file from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script>
+        // Initialize Pannellum viewer with 10 scenes for seamless navigation
+        pannellum.viewer('panorama', {
+            "default": {
+                "firstScene": "scene1",
+                "sceneFadeDuration": 1000,
+                "autoLoad": true
+            },
+            "scenes": {
+                "scene1": {
+                    "type": "equirectangular",
+                    "panorama": "i1.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene2",
+                            "cssClass": "custom-hotspot-next"
+                        }
+                    ]
+                },
+                "scene2": {
+                    "type": "equirectangular",
+                    "panorama": "i2.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene3",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene1",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                "scene3": {
+                    "type": "equirectangular",
+                    "panorama": "i3.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene4",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene2",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                // Repeat for all scenes up to scene10
+                "scene4": {
+                    "type": "equirectangular",
+                    "panorama": "i4.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene5",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene3",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                "scene5": {
+                    "type": "equirectangular",
+                    "panorama": "i5.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene6",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene4",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                "scene6": {
+                    "type": "equirectangular",
+                    "panorama": "i6.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene7",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene5",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                "scene7": {
+                    "type": "equirectangular",
+                    "panorama": "i7.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene8",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene6",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                "scene8": {
+                    "type": "equirectangular",
+                    "panorama": "i8.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene9",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene7",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                "scene9": {
+                    "type": "equirectangular",
+                    "panorama": "i9.jpg",
+                    "hotSpots": [
+                        {
+                            "pitch": 0,
+                            "yaw": 30,
+                            "type": "scene",
+                            "sceneId": "scene10",
+                            "cssClass": "custom-hotspot-next"
+                        },
+                        {
+                            "pitch": 0,
+                            "yaw": -30,
+                            "type": "scene",
+                            "sceneId": "scene8",
+                            "cssClass": "custom-hotspot-previous"
+                        }
+                    ]
+                },
+                
+            }
+        });
+    </script>
+</body>
+</html>
